@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Bookmarks</h1>
-
-<table>
+<h3>Bookmarks</h3>
+<%= render 'bookmarks/form', bookmark: @bookmark %>
+<br>
+<h4>Bookmark List</h4>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,7 +19,3 @@
     <%= render 'index' %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Bookmark', new_bookmark_path %>

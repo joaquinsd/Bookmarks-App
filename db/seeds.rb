@@ -12,18 +12,18 @@ Type.destroy_all
 
 3.times do
   @category = Category.create(
-    name: Faker::Commerce.department(max: 1).humanize,
+    name: Faker::Commerce.unique.department(max: 1).humanize,
     public: Faker::Boolean.boolean
   )
   2.times do
     @subcategory = Category.create(
-      name: Faker::Commerce.department(max: 1).humanize + ' ' + @category.name,
+      name: Faker::Commerce.unique.department(max: 1).humanize + ' ' + @category.name,
       public: Faker::Boolean.boolean,
       category_id: @category.id
     )
     2.times do
       Category.create(
-        name: Faker::Commerce.department(max: 1).humanize + ' ' + @subcategory.name,
+        name: Faker::Commerce.unique.department(max: 1).humanize + ' ' + @subcategory.name,
         public: Faker::Boolean.boolean,
         category_id: @subcategory.id
       )
@@ -33,7 +33,7 @@ end
 
 10.times do
   Type.create(
-    name: Faker::Hipster.word.humanize
+    name: Faker::Hipster.unique.word.humanize
   )
 end
 
@@ -49,11 +49,11 @@ categories = Category.all
 types = Type.all
 
 bookmarks.each do |bookmark|
-  categ = rand(1..5)
+  categ = rand(1..3)
   categ.times do
     BookmarkCategory.create!(bookmark_id: bookmark.id, category_id: categories.sample.id)
   end
-  type = rand(1..5)
+  type = rand(1..3)
   type.times do
     BookmarkType.create!(bookmark_id: bookmark.id, type_id: types.sample.id)
   end

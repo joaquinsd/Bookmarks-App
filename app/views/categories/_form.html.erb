@@ -13,20 +13,20 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'form-control form-control-sm', placeholder: 'Enter a title for your category' %>
   </div>
-
+  <br>
   <div class="field">
     <%= form.label :category_id %>
-    <%= form.select :category_id, Category.all.map { |w| [w.name, w.id] }, include_blank: 'Select your Parent Category'  %>
+    <%= form.select :category_id, Category.all.map { |w| [w.name, w.id] }, {include_blank: 'Select your Parent Category'}, {class: "form-control form-select form-select-sm"} %>
   </div>
-
-  <div class="field">
-    <%= form.check_box :public %>
-    <%= form.label :public, 'Is public?' %>
+  <br>
+  <div class="field form-check form-check-inline">
+    <%= form.check_box :public, class: 'form-check-input' %>
+    <%= form.label :public, 'The category is public?' %>
   </div>
 
   <div class="actions">
-    <%= form.submit 'Submit', class: "btn btn-primary my-3"%>
+    <%= form.submit 'Submit', class: "btn btn-sm btn-primary my-3"%>
   </div>
 <% end %>

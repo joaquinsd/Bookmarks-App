@@ -3,8 +3,9 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks or /bookmarks.json
   def index
+    @bookmark = Bookmark.new
     @bookmarks = Bookmark.all
-    @categories = Category.all
+    @categories = Category.where(public: true)
     @types = Type.all
   end
 
@@ -15,10 +16,16 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/new
   def new
     @bookmark = Bookmark.new
+    @categories = Category.where(public: true)
+    @types = Type.all
+
   end
 
   # GET /bookmarks/1/edit
   def edit
+    @bookmarks = Bookmark.all
+    @categories = Category.where(public: true)
+    @types = Type.all
   end
 
   # POST /bookmarks or /bookmarks.json
