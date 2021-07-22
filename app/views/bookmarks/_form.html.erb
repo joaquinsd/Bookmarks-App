@@ -1,0 +1,51 @@
+<%= form_with(model: bookmark, remote: true) do |form| %>
+  <% if bookmark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+
+      <ul>
+        <% bookmark.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <h5>New Bookmark</h5>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :url %>
+      <%= form.text_field :url %>
+    </div>
+    <h6>Categories</h6>
+    <div class="field">
+      <%= form.collection_check_boxes(:category_ids,
+      Category.all,
+      :id,
+      :name) do |b| %>
+  <%= b.label class:"label-checkbox" do%>
+  <%=b.check_box + "  " + b.text%>
+  <%end%>
+  <% end %>
+    </div>
+
+    <h6>Types</h6>
+    <div class="field">
+      <%= form.collection_check_boxes(:type_ids,
+      Type.all,
+      :id,
+      :name) do |b| %>
+  <%= b.label class:"label-checkbox" do%>
+  <%=b.check_box + "  " +b.text%>
+  <%end%>
+  <% end %>  </div>
+
+    <div class="actions">
+      <%= form.submit 'Save Bookmark', data: {confirm: 'Are you sure?'}, class: "btn btn-primary my-3" %>
+    </div>
+  </div>
+<% end %>
