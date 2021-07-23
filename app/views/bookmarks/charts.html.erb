@@ -1,5 +1,13 @@
-<h3>Bookmark Distribution</h3>
-
-<h6>Distribution by Category</h6>
-
-<h6>Distribution by Types</h6>
+<h3 class="text-center">Bookmark Distribution</h3>
+<hr>
+<div class="row">
+  <div class="col-6">
+    <h5 class="text-center">Distribution by Category</h5>
+    <%= pie_chart @categories_chart%>
+  </div>
+  <div class="col-6">
+    <h5 class="text-center">Distribution by Types</h5>
+    <%= pie_chart @types_chart%>
+  </div>
+</div>
+<hr>

@@ -10,7 +10,9 @@ class BookmarksController < ApplicationController
   end
 
   def charts
-    
+    @categories_chart = BookmarkCategory.group(:category_id).count.map { |k, v| [Category.find(k).name.to_s, v] }.to_h
+    @types_chart = BookmarkType.group(:type_id).count.map { |k, v| [Type.find(k).name.to_s, v] }.to_h
+
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json
@@ -81,4 +83,9 @@ class BookmarksController < ApplicationController
     def bookmark_params
       params.require(:bookmark).permit(:name, :url, {category_ids:[]}, {type_ids:[]})
     end
+
+    def percent(v,total)
+      ((v.to_f / total) * 100).round(2)
+    end
+
 end
