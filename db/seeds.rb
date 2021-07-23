@@ -37,7 +37,7 @@ end
   )
 end
 
-50.times do
+20.times do
   Bookmark.create(
     name: Faker::Hipster.sentence(word_count: 3),
     url: Faker::Internet.url

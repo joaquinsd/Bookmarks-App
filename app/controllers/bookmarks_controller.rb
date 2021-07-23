@@ -4,9 +4,13 @@ class BookmarksController < ApplicationController
   # GET /bookmarks or /bookmarks.json
   def index
     @bookmark = Bookmark.new
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.all.includes(:categories, :types)
     @categories = Category.where(public: true)
     @types = Type.all
+  end
+
+  def charts
+    
   end
 
   # GET /bookmarks/1 or /bookmarks/1.json

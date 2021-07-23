@@ -14,7 +14,7 @@
       <tr>
         <td><%= @category.parent %></td>
         <td><%= @category.public_cat? %></td>
-        <td><%= @category.subcategories %></td>
+        <td><%= @category.subcategories_names %></td>
         <td><%= @category.bookmark_count %></td>
       </tr>
     </tbody>
@@ -34,6 +34,7 @@
       <%= render 'bookmarks/index' %>
     </tbody>
   </table>
+  <%= link_to 'API EndPoint', api_path(@category) %>
   <%= link_to 'Edit', edit_category_path(@category) %>
 <% else %>
   <h5>Sorry!</h5>

@@ -6,11 +6,11 @@ class Bookmark < ApplicationRecord
   has_many :types, through: :bookmark_types, dependent: :destroy
 
   def category_list
-    categories.map { |w| [w.name] }.join(', ')
+    categories.includes(:bookmark_categories, :categories).map(&:name).join(', ')
   end
 
   def type_list
-    types.map(&:name).join(', ')
+    types.includes(:bookmark_types, :bookmarks).map(&:name).join(', ')
   end
 
 end

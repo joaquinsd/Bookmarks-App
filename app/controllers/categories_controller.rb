@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy change ]
+  before_action :set_category, only: %i[ show edit update destroy change api ]
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.all.includes(:bookmark_categories)
   end
 
   # GET /categories/1 or /categories/1.json
@@ -15,13 +15,24 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
   end
-
+  # POST /categories/1/change
   def change
     @category.change_status
     @categories = Category.all
     respond_to do |format|
       format.js { render nothing: true, notice: "The category #{@category.name} status changed" }
     end
+  end
+
+  # GET /api/categories/1.json
+
+  def api
+    response = {}
+    response[:id] = @category.id
+    response[:name] = @category.name
+    response[:subcategories] = @category.json_subcategories
+    response[:bookmarks] = @category.json_bookmarks
+    render json: JSON.pretty_generate(response)
   end
 
   # GET /categories/1/edit
